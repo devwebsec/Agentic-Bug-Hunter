@@ -2,6 +2,11 @@
 name: web2-vuln-classes
 description: Complete reference for 26 web2 bug classes with root causes, detection patterns, bypass tables, exploit techniques, and real paid examples. Covers IDOR, auth bypass, XSS, SSRF (11 IP bypass techniques), SQLi, business logic, race conditions, OAuth/OIDC, file upload (10 bypass techniques), GraphQL, LLM/AI (ASI01-ASI10 agentic framework), API misconfig (mass assignment, JWT attacks, prototype pollution, CORS), ATO taxonomy (9 paths), SSTI (Jinja2/Twig/Freemarker/ERB/Spring), subdomain takeover, cloud/infra misconfigs, HTTP smuggling (CL.TE/TE.CL/H2.CL), cache poisoning, MFA bypass (7 patterns), SAML attacks (XSW/comment injection/signature stripping), error disclosure / debug endpoints (stack trace regex per framework, chain templates), CSS injection (attribute-selector exfiltration, opacity clickjacking, @import). LFI / file inclusion -> RCE (php://filter source disclosure, iconv filter-chain RCE with no upload, log/environ poisoning, .user.ini/.htaccess auto_prepend, data:// + expect:// wrappers, session inclusion, traversal bypass table). Insecure deserialization (PHP __wakeup bypass / phar:// POP chains, Java ysoserial CommonsCollections gadgets + magic bytes, Python pickle __reduce__ + signed-cookie forgery, Node node-serialize). Dependency confusion / supply chain (internal package-name discovery, unclaimed-name confirmation, callback-only PoC, npm/pip/Maven/RubyGems variants). Use when hunting a specific vuln class or studying what makes bugs pay.
 ---
+## Scoped execution / no implicit side effects
+
+This is a **catalog of vulnerability classes and lab examples**. It is not a plan to run every payload, bypass, brute-force probe or exploit chain. Pick only the one applicable hypothesis, minimize request count and use existing evidence. Live auth/financial changes, data reads, high-volume tests, and attacker-controlled callbacks require explicit owner authorization. Unverified exploitability is UNKNOWN, not automatic failure or a request for dangerous proof. Repository [AGENTS.md](../../AGENTS.md) governs authority, WIP=1, trusted evidence, required human approval and terminal outcomes. Loading this file alone does not authorize running tools. Return to the requested result after one relevant step; do not recursively invoke master workflows.
+
+
 
 # WEB2 BUG CLASSES — 26 Classes
 
