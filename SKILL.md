@@ -1,5 +1,5 @@
 ---
-name: bug-bounty
+name: bug-bounty-entrypoint
 description: Entry-point alias for the canonical in-repository bug bounty skill; route only explicitly scoped, authorized tasks.
 ---
 
