@@ -1,6 +1,6 @@
 ---
 name: report-writing
-description: Bug bounty report writing for H1/Bugcrowd/Intigriti/Immunefi — report templates, human tone guidelines, impact-first writing, CVSS 3.1 scoring, title formula, impact statement formula, severity decision guide, downgrade counters, pre-submit checklist. Use after validating a finding and before submitting. Never use "could potentially" — prove it or don't report.
+description: Bug bounty report writing for H1/Bugcrowd/Intigriti/Immunefi — report templates, human tone guidelines, impact-first writing, CVSS 3.1 scoring, title formula, impact statement formula, severity decision guide, downgrade counters, pre-submit checklist. Use after validating a finding and before submitting. Distinguish confirmed impact from hypotheses and uncertainty; do not force unsafe exploit proof.
 ---
 
 ## Execution boundary
@@ -34,7 +34,7 @@ the report draft and relevant references under an access-controlled case directo
 `findings/<target-or-program>-<bug-class>/`. Do not create duplicate case folders or store secret values. Never rely on
 terminal or tmux scrollback for content the hunter needs later.
 
-Minimum files:
+Suggested files when local case retention is actually required:
 
 ```text
 findings/<target-or-program>-<bug-class>/
