@@ -2,6 +2,11 @@
 name: web3-audit
 description: Smart contract security audit — 10 DeFi bug classes (accounting desync, access control, incomplete path, off-by-one, oracle, ERC4626, reentrancy, flash loan, signature replay, proxy), pre-dive kill signals (TVL < $500K etc), Foundry PoC template, grep patterns for each class, and real Immunefi paid examples. Use for any Solidity/Rust contract audit or when deciding whether a DeFi target is worth hunting.
 ---
+## Scoped execution / no implicit side effects
+
+Prioritization heuristics do not override a specifically commissioned smart-contract review. Prefer source-level and offline/fork tests; no mainnet transaction, token movement, flash-loan execution or liquidity interaction without separate authorization. Exact deployed bytecode/contract version and scope must match any claimed finding. Repository [AGENTS.md](../../AGENTS.md) governs authority, WIP=1, trusted evidence, required human approval and terminal outcomes. Reading this skill does not authorize running tools or recursively invoking workflows.
+
+
 
 # WEB3 SMART CONTRACT AUDIT
 
@@ -9,7 +14,7 @@ description: Smart contract security audit — 10 DeFi bug classes (accounting d
 
 ---
 
-## PRE-DIVE KILL SIGNALS (check BEFORE any code review)
+## PRE-DIVE PRIORITIZATION SIGNALS (optional; not grounds to abandon an authorized review)
 
 > ZKsync lesson: $322M TVL + OZ audit + 750K LOC + 5 sessions = 0 findings. Large well-audited bridges are extremely hard.
 
