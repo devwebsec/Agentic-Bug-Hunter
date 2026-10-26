@@ -18,7 +18,7 @@ Fast-kill rug pull detection and deep token security analysis for EVM and Solana
 
 Use these as **optional prioritization heuristics**. If the user commissioned an audit, record the signal and continue with its requested scope; do not declare the token unsafe or cancel the task solely from heuristics.
 
-### Hard Kills (Skip Immediately)
+### Priority signals (do not automatically cancel an authorized review)
 - **Contract not verified** on Etherscan/Solscan → Cannot audit source = cannot trust
 - **Deployer wallet** has history of rug pulls (check Etherscan deployer page)
 - **Token age < 1 hour** AND no known team → Too early, wait for more data
@@ -27,7 +27,7 @@ Use these as **optional prioritization heuristics**. If the user commissioned an
 - **Transfer hook present** (Token-2022) with mutable hook program → Honeypot vector
 - **Permanent delegate** extension (Token-2022) → Can steal all holder tokens
 
-### Soft Kills (Proceed with Extreme Caution)
+### Additional caution signals (scope and risk dependent)
 - Top holder > 20% of supply (excluding DEX pools)
 - LP not burned or locked in verified contract
 - Contract is upgradeable / proxy with retained admin
