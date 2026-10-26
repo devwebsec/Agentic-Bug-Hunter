@@ -2,6 +2,11 @@
 name: graphql-audit
 description: GraphQL security hunting — introspection abuse, field suggestion enumeration (clairvoyance), batching DoS, IDOR via aliasing, auth bypass, injection via arguments, subscription abuse, depth/complexity bombs, and WAF bypass. Covers graphw00f fingerprinting, gqlmap, graphql-cop, and inql. Use when a target exposes a /graphql, /api/graphql, or GQL-over-HTTP endpoint.
 ---
+## Scoped execution / no implicit side effects
+
+Select focused non-destructive static/schema checks or owner-approved low-rate tests; do not run alias bombs, OTP brute-force batches, expensive queries, or rate-limit stress tests on live services without specific written authorization. Authenticated checks require approved test accounts. Use existing schema/evidence before re-querying. Repository [AGENTS.md](../../AGENTS.md) governs authority, WIP=1, trusted evidence, required human approval and terminal outcomes. Loading this file alone does not authorize running tools. Return to the requested result after one relevant step; do not recursively invoke master workflows.
+
+
 
 # GRAPHQL SECURITY AUDIT
 
