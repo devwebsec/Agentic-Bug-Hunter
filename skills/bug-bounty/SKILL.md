@@ -3,6 +3,12 @@ name: bug-bounty
 description: Complete bug bounty workflow — recon (subdomain enumeration, asset discovery, fingerprinting, HackerOne scope, source code audit), pre-hunt learning (disclosed reports, tech stack research, mind maps, threat modeling), vulnerability hunting (IDOR, SSRF, XSS, auth bypass, CSRF, race conditions, SQLi, XXE, file upload, business logic, GraphQL, HTTP smuggling, cache poisoning, OAuth, timing side-channels, OIDC, SSTI, subdomain takeover, cloud misconfig, ATO chains, agentic AI), LLM/AI security testing (chatbot IDOR, prompt injection, indirect injection, ASCII smuggling, exfil channels, RCE via code tools, system prompt extraction, ASI01-ASI10), A-to-B bug chaining (IDOR→auth bypass, SSRF→cloud metadata, XSS→ATO, open redirect→OAuth theft, S3→bundle→secret→OAuth), bypass tables (SSRF IP bypass, open redirect bypass, file upload bypass), language-specific grep (JS prototype pollution, Python pickle, PHP type juggling, Go template.HTML, Ruby YAML.load, Rust unwrap), and reporting (7-Question Gate, 4 validation gates, human-tone writing, templates by vuln class, CVSS 3.1, PoC generation, always-rejected list, conditional chain table, submission checklist). Use for ANY bug bounty task — starting a new target, doing recon, hunting specific vulns, auditing source code, testing AI features, validating findings, or writing reports. 中文触发词：漏洞赏金、安全测试、渗透测试、漏洞挖掘、信息收集、子域名枚举、XSS测试、SQL注入、SSRF、安全审计、漏洞报告
 ---
 
+## Execution boundary (canonical)
+
+This is the canonical **bug-bounty methodology**, not an instruction to launch all phases or tools for every request. Repository-level authorization, WIP=1, scoped outcomes, least-intrusive evidence and stop conditions are defined in [AGENTS.md](../../AGENTS.md). Choose **one relevant specialist skill** only when the task demands it; existing evidence is reused. Scope confirmation precedes active probing. Descriptions of offensive techniques are reference material, not automatic execution orders. Do not treat a sample credential, account or live token as permission to test it. Do not recursively reload this skill from itself or from the root alias.
+
+
+
 # Bug Bounty Master Workflow
 
 Full pipeline: Recon -> Learn -> Hunt -> Validate -> Report. One skill for everything.
@@ -26,7 +32,7 @@ Full pipeline: Recon -> Learn -> Hunt -> Validate -> Report. One skill for every
 | Open redirect alone | Need ATO or OAuth chain |
 | "Could be used in a chain if..." | Build the chain first, THEN report |
 
-**You must demonstrate actual harm. "Could" is not a bug. Prove it works or drop it.**
+**Report only what the available evidence supports. Prefer benign/test-account and non-destructive validation; a suspected credential leak does not justify using the credential. Mark unverified impact as REVIEW_REQUIRED, not fabricated proof.**
 
 ---
 
@@ -38,9 +44,9 @@ Full pipeline: Recon -> Learn -> Hunt -> Validate -> Report. One skill for every
 4. **Validate before writing** -- check CHANGELOG, design docs, deployment scripts FIRST
 5. **One bug class at a time** -- go deep, don't spray
 6. **Verify data isn't already public** -- check web UI in incognito before reporting API "leaks"
-7. **5-MINUTE RULE** -- if a target shows nothing after 5 min probing (all 401/403/404), MOVE ON
+7. **BOUNDED RECON** -- stop or redirect when existing evidence is sufficient; five minutes is an optional heuristic, never permission to expand scope
 8. **IMPACT-FIRST HUNTING** -- ask "what's the worst thing if auth was broken?" If nothing valuable, skip target
-9. **CREDENTIAL LEAKS need exploitation proof** -- finding keys isn't enough, must PROVE what they access
+9. **CREDENTIAL LEAKS need safe validation** -- verify format, provenance and authorized owner response; do **not** log in with found credentials or extract sensitive data to demonstrate impact
 10. **STOP SHALLOW RECON SPIRALS** -- don't probe 403s, don't grep for analytics keys, don't check staging domains that lead nowhere
 11. **BUSINESS IMPACT over vuln class** -- severity depends on CONTEXT, not just vuln type
 12. **UNDERSTAND THE TARGET DEEPLY** -- before hunting, learn the app like a real user
@@ -1377,7 +1383,7 @@ curl -s http://TARGET:2375/containers/json
 
 ## The 7-Question Gate (Run BEFORE Writing ANY Report)
 
-All 7 must be YES. Any NO -> STOP.
+Answer the seven questions using existing scoped evidence. NO means not validated for the intended claim; UNKNOWN means REVIEW_REQUIRED, not an instruction to attempt a dangerous proof.
 
 ### Q1: Can I exploit this RIGHT NOW with a real PoC?
 Write the exact HTTP request. If you cannot produce a working request -> KILL IT.
