@@ -2,6 +2,11 @@
 name: argus
 description: Argus — the all-seeing scanner suite. Six automated scanners for high-value web + LLM bug classes — CORS misconfiguration (origin reflection / null / credentialed read), CRLF & host-header injection, NoSQL injection (operator auth-bypass / $where blind), JWT attacks (alg:none / RS256→HS256 confusion / secret crack), out-of-band confirmation of blind SSRF/XXE/SQLi/RCE/Log4Shell via interactsh, and an LLM red-team corpus (prompt-injection / jailbreak / system-prompt leak / exfil / indirect injection). Use when a target exposes a JSON API, a login endpoint, JWT auth, a parameter that might reach the server, a chatbot/agent, or any endpoint suspected of a blind/out-of-band bug.
 ---
+## Scoped execution / no implicit side effects
+
+Use only the scanner relevant to the authorized target and user request. Do not run six scanners as an automatic suite. Use only approved test identities; do not paste live cookies/tokens into shared logs or evidence. Stop once the required scoped outcome is established. Repository [AGENTS.md](../../AGENTS.md) governs authority, WIP=1, trusted evidence, required human approval and terminal outcomes. Loading this file alone does not authorize running tools. Return to the requested result after one relevant step; do not recursively invoke master workflows.
+
+
 
 # ARGUS — THE ALL-SEEING SCANNER SUITE
 
@@ -41,7 +46,7 @@ Sends crafted `Origin` headers, classifies `Access-Control-Allow-Origin` /
 - **MEDIUM** — reflects without creds (exploitable when auth = non-cookie token), or trusts http downgrade.
 - Probes suffix/prefix regex bypass (`target.com.evil`, `notarget.com`) and subdomain trust (chains with [takeover](../../commands/takeover.md)).
 
-**Always pass `--cookie` with a live session** — the credentialed path is the win.
+**Pass `--cookie` only when the owner explicitly approved testing with a dedicated test session.** Anonymous checks need no cookie; never reuse an unrelated live user's credentials.
 
 ## 2. CRLF / host-header — `/crlf`
 
