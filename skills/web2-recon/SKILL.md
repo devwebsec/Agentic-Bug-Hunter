@@ -2,6 +2,11 @@
 name: web2-recon
 description: Web2 recon pipeline — subdomain enumeration (subfinder, Chaos API, assetfinder), live host discovery (dnsx, httpx), URL crawling (katana, waybackurls, gau), directory fuzzing (ffuf), JS analysis (LinkFinder, SecretFinder), continuous monitoring (new subdomain alerts, JS change detection, GitHub commit watch). Use when starting recon on any web2 target or when asked about asset discovery, subdomain enum, or attack surface mapping.
 ---
+## Scoped execution / no implicit side effects
+
+Do not run a full network recon pipeline for every task. Verify the program-authorized scope first; reuse current asset inventory and scan evidence. Separate passive discovery from active HTTP probing/port scanning, rate-limit and confirm scope before the latter. No unattended monitoring, secret persistence in shell profiles, or external tool installation without approval. Repository [AGENTS.md](../../AGENTS.md) governs authority, WIP=1, trusted evidence, required human approval and terminal outcomes. Loading this file alone does not authorize running tools. Return to the requested result after one relevant step; do not recursively invoke master workflows.
+
+
 
 # WEB2 RECON PIPELINE
 
@@ -14,8 +19,7 @@ Full asset discovery from nothing to a prioritized URL list ready for hunting.
 ```bash
 # 1. Set your Chaos API key (get free key at chaos.projectdiscovery.io)
 export CHAOS_API_KEY="your-key-here"
-# Add to ~/.zshrc or ~/.bashrc for persistence:
-echo 'export CHAOS_API_KEY="your-key-here"' >> ~/.zshrc
+# Do not persist API keys in shell startup files. Retrieve from the approved secret manager for the authorized session and clear at exit.
 
 # 2. Update nuclei templates (run weekly)
 nuclei -update-templates
@@ -52,7 +56,7 @@ which subfinder httpx dnsx nuclei katana waybackurls gau dalfox ffuf anew gf int
 
 ## STANDARD RECON PIPELINE
 
-### Pre-Hunt: Always Run First
+### Conditional recon — only when existing evidence is insufficient and scope is authorized
 
 ```bash
 TARGET="target.com"

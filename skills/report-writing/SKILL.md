@@ -1,7 +1,13 @@
 ---
 name: report-writing
-description: Bug bounty report writing for H1/Bugcrowd/Intigriti/Immunefi — report templates, human tone guidelines, impact-first writing, CVSS 3.1 scoring, title formula, impact statement formula, severity decision guide, downgrade counters, pre-submit checklist. Use after validating a finding and before submitting. Never use "could potentially" — prove it or don't report.
+description: Bug bounty report writing for H1/Bugcrowd/Intigriti/Immunefi — report templates, human tone guidelines, impact-first writing, CVSS 3.1 scoring, title formula, impact statement formula, severity decision guide, downgrade counters, pre-submit checklist. Use after validating a finding and before submitting. Distinguish confirmed impact from hypotheses and uncertainty; do not force unsafe exploit proof.
 ---
+
+## Execution boundary
+
+Use this skill **only when the user wants a report** for an authorized in-scope finding. Preserve uncertainty and evidence provenance; do not invent impact, force invasive proof, or create additional mandatory folders or parallel reports if an approved evidence register already exists. Reporting completes when the requested report is delivered, not when a new hunt starts.
+
+
 
 # REPORT WRITING
 
@@ -11,8 +17,7 @@ Impact-first. Human tone. No theoretical language. Triagers are people.
 
 ## THE MOST IMPORTANT RULE
 
-> **Never use "could potentially" or "could be used to" or "may allow".**
-> Either it does the thing or it doesn't. If you haven't proved it, don't claim it.
+> **Use confidence-accurate language.** State demonstrated impact as confirmed; untested or theoretical impact as hypothesis / UNKNOWN and do not present it as a validated exploit.
 
 ```
 BAD:  "This vulnerability could potentially allow an attacker to access user data."
@@ -24,12 +29,12 @@ GOOD: "An attacker can access any user's order history by changing the user_id
 
 ## PERSISTENCE RULE
 
-Every report-writing session must leave a complete finding folder on disk. Save
-the report draft, pre-submit checklist, references, downgrade counters, and final
-submission note under `findings/<target-or-program>-<bug-class>/`. Never rely on
+When authorized local evidence storage is required and no approved case repository exists, save
+the report draft and relevant references under an access-controlled case directory such as
+`findings/<target-or-program>-<bug-class>/`. Do not create duplicate case folders or store secret values. Never rely on
 terminal or tmux scrollback for content the hunter needs later.
 
-Minimum files:
+Suggested files when local case retention is actually required:
 
 ```text
 findings/<target-or-program>-<bug-class>/

@@ -2,6 +2,11 @@
 name: credential-attack
 description: Password spray methodology for bug bounty — when to do it vs web-vuln hunting, the wordlist-gen + breach-check + osint-employees + spray pipeline, mode selection (http-form / oauth / o365 / okta), rate-limit + lockout tactics, BBP legal guardrails, success detection, and the spray → authenticated /hunt chain pattern. Use when assessing whether credential attack is worth running on a target, picking the right mode, or recovering from common pitfalls.
 ---
+## Scoped execution / no implicit side effects
+
+**Disabled by default for live accounts.** This skill is a risk-assessment and LAB methodology unless the asset owner has explicitly approved precise accounts, testing window, rate/lockout thresholds, and stop conditions. Do not attempt discovered/stolen credentials, real-user login attempts or password spraying as an implicit next step. Never use a finding to self-authorize testing. If approvals are absent, deliver a review and mark execution NOT EXECUTED. Repository [AGENTS.md](../../AGENTS.md) governs authority, WIP=1, trusted evidence, required human approval and terminal outcomes. Loading this file alone does not authorize running tools. Return to the requested result after one relevant step; do not recursively invoke master workflows.
+
+
 
 # CREDENTIAL ATTACK PIPELINE
 
@@ -119,7 +124,7 @@ For mature security-conscious targets, expect very few emails. The CT-log hostna
 
 ### Stage 4 — `/spray <login-url> --mode <mode>`
 
-The **most dangerous** command. Real auth attempts against live accounts. Read [HARD GUARDS](#hard-guards) before running.
+**High-risk operation:** no live authentication attempts without independent, explicit owner authorization and a bounded test-account plan. Read [HARD GUARDS](#hard-guards); a skill does not grant permission.
 
 **Mode selection:**
 

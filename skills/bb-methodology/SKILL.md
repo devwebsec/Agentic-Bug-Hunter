@@ -3,6 +3,12 @@ name: bb-methodology
 description: Use at the START of any bug bounty hunting session, when switching targets, or when feeling lost about what to do next. Master orchestrator that combines the 5-phase non-linear hunting workflow with the critical thinking framework (developer psychology, anomaly detection, What-If experiments). Routes to all other skills based on current hunting phase. Also use when asking "what should I do next" or "where am I in the process."
 ---
 
+## Execution boundary
+
+This is optional navigation guidance, not another mandatory orchestrator. Follow repository [AGENTS.md](../../AGENTS.md) for task scope, WIP=1, authority, evidence reuse and completion. A phase transition is permitted only when the next step adds necessary evidence to the **same user-requested result**; do not loop back to recon because a phase diagram includes it. Do not initiate scans or credentials testing from reading this skill.
+
+
+
 # Bug Bounty Methodology: Workflow + Mindset
 
 Master orchestrator for hunting sessions. Combines the 5-phase non-linear workflow with the critical thinking framework that separates top 1% hunters from the rest.
@@ -146,9 +152,9 @@ High-signal prompts:
 +-------------------------------------------------+
 ```
 
-**THIS IS NOT LINEAR.** Move freely between phases. When stuck, return to a previous phase.
+**This is a navigational map, not a mandatory execution cycle.** Follow only the next step needed for the current result; revisit prior phases only for a demonstrable missing fact or changed target.
 
-### Phase 0: SESSION START (Every Time)
+### Phase 0: SESSION START (when no current task context exists)
 
 **Before touching any tool, answer these:**
 
@@ -197,7 +203,7 @@ Google Dorks -> JS file download -> Hidden param discovery -> API mapping
 
 **Command**: `/recon target.com`
 
-**After every recon (mandatory):**
+**After a newly executed authorized recon, if the lead board is not already updated:**
 ```bash
 python3 tools/lead_board.py ingest target.com
 python3 tools/lead_board.py show target.com
@@ -369,7 +375,7 @@ Every 20 minutes ask yourself: **"Am I making progress?"**
 | Recon: JS | `jsluice` + `mantra` + `trufflehog --only-verified` | Extract URLs/secrets -> find API keys -> verify keys actually work |
 | Recon: Ports | `naabu` (wide) -> `rustscan` (deep) | Fast top-1000 sweep -> full 65535 on interesting targets |
 | Recon: Scan | `nuclei -tags cve` -> `nuclei -tags takeover` | Known CVEs first -> then takeover (act immediately) |
-| **After recon (ALWAYS)** | `python3 tools/lead_board.py ingest <target>` → `show` → `next` | Route every signal to a `hunt-*` skill; never lose a lead. `touch` when you start/kill/report |
+| **After new recon, when needed** | `python3 tools/lead_board.py ingest <target>` → `show` → `next` | Route every signal to a `hunt-*` skill; never lose a lead. `touch` when you start/kill/report |
 | After recon: EOL | `python3 tools/eol_check.py --tech "php=7.4,nginx=1.18"` | Flag EOL products from `technologies.txt` fingerprints |
 | Mapping: Params | `arjun` + `paramspider` + ParamMiner / `tools/param_discovery.sh` | Brute-force hidden params + mine archives + cache headers |
 | Mapping: GraphQL | `bash tools/graphql_audit.sh <url>` | Introspection → fingerprint → batching → IDOR → injection |

@@ -1,11 +1,17 @@
 ---
 name: triage-validation
-description: Finding validation before writing any report — 7-Question Gate (all 7 questions), 4 pre-submission gates, always-rejected list, conditionally valid with chain table, CVSS 3.1 quick reference, severity decision guide, report title formula, 60-second pre-submit checklist. Use BEFORE writing any report. One wrong answer = kill the finding and move on. Saves N/A ratio.
+description: Finding validation before writing any report — 7-Question Gate (all 7 questions), 4 pre-submission gates, always-rejected list, conditionally valid with chain table, CVSS 3.1 quick reference, severity decision guide, report title formula, 60-second pre-submit checklist. Use BEFORE writing any report. A NO invalidates the specific claimed severity/impact; an UNKNOWN requires human review rather than forced intrusive testing.
 ---
+
+## Scope and authority
+
+This skill performs **review of already collected evidence**. It does not authorize live exploitation, credential testing, destructive proof, or forced repetition of scans. Use a single finding record. Unanswered questions are UNKNOWN/REVIEW_REQUIRED, not automatically false findings. Once disposition is recorded, return to the user-requested outcome; do not restart recon or reporting unprompted.
+
+
 
 # TRIAGE & VALIDATION
 
-One wrong answer = STOP. Kill it. Move on.
+A failed essential criterion prevents validation of that claim; preserve inconclusive findings as REVIEW_REQUIRED instead of silently discarding evidence.
 
 > "N/A hurts your validity ratio. Informative is neutral. Only submit what passes all 7 questions."
 
@@ -13,7 +19,7 @@ One wrong answer = STOP. Kill it. Move on.
 
 ## THE 7-QUESTION GATE
 
-Ask IN ORDER. One wrong answer = STOP immediately.
+Evaluate existing evidence once per finding and revision. Stop unsafe or unauthorized tests; missing evidence becomes REVIEW_REQUIRED.
 
 ---
 
@@ -95,7 +101,7 @@ Check the NEVER SUBMIT list below. If it's on this list without a chain → **KI
 
 ---
 
-### Q8: Identity check — which session found this, and does it survive?
+## Authenticated-finding identity check (additional applicability check, not Q8)
 
 For any finding made under an authenticated hunt, record the answer to each:
 
@@ -131,7 +137,7 @@ Blank answers auto-fail on auth-related findings.
 
 ## 4 PRE-SUBMISSION GATES
 
-Run in sequence. ALL 4 must PASS.
+Apply only the checks relevant to this proposed submission; use previous valid evidence, and preserve UNKNOWN for incomplete checks. Do not launch new probing solely to fill a form.
 
 ### Gate 0: Reality Check (30 seconds)
 ```

@@ -2,6 +2,11 @@
 name: cicd-security
 description: CI/CD pipeline security hunting — GitHub Actions workflow injection, secret exfiltration, self-hosted runner poisoning, dependency confusion, OIDC token theft, and supply chain attacks. Covers sisakulint scanning, manual workflow analysis, and chaining CI/CD bugs into critical findings. Use when a target has public repos, GitHub Actions, CircleCI, Jenkins, or GitLab CI.
 ---
+## Scoped execution / no implicit side effects
+
+Run repository/workflow static review first when in scope. Do not open PRs, trigger production-capable workflows, exercise runner secrets, or create malicious pipelines without separate written authorization and isolated test fixtures. Reuse a prior scan for the same workflow SHA and scope. Repository [AGENTS.md](../../AGENTS.md) governs authority, WIP=1, trusted evidence, required human approval and terminal outcomes. Loading this file alone does not authorize running tools. Return to the requested result after one relevant step; do not recursively invoke master workflows.
+
+
 
 # CI/CD SECURITY — Pipeline Attack Surface
 

@@ -2,6 +2,11 @@
 name: meme-coin-audit
 description: Meme coin and token security audit — rug pull detection (honeypot, hidden mint, fee manipulation, LP lock bypass), Solana SPL token analysis (freeze authority, mint authority, metadata mutability), Token-2022 extension risks (transfer hooks, permanent delegate), DEX liquidity pool attacks (sandwich amplification, LP drain, bonding curve exploits), pump.fun/Raydium/Jupiter integration risks, token_scanner.py automation, and real exploit examples from 2024-2025. Use for any token audit, rug pull assessment, meme coin security review, or pre-investment due diligence.
 ---
+## Scoped execution / no implicit side effects
+
+Pre-dive kill signals are *efficiency heuristics*, not evidence of security or a reason to abandon an explicitly commissioned audit. Do not deploy exploit transactions or interact with live liquidity, users or funds without narrow owner permission; use fork/simulation for proof. Report actual coverage and uncertainty. Repository [AGENTS.md](../../AGENTS.md) governs authority, WIP=1, trusted evidence, required human approval and terminal outcomes. Loading this file alone does not authorize running tools. Return to the requested result after one relevant step; do not recursively invoke master workflows.
+
+
 
 # MEME COIN & TOKEN SECURITY AUDIT
 
@@ -11,9 +16,9 @@ Fast-kill rug pull detection and deep token security analysis for EVM and Solana
 
 ## PRE-DIVE KILL SIGNALS
 
-Check these BEFORE reading a single line of code. If any are true, skip the audit — the token is likely a rug or not worth the time.
+Use these as **optional prioritization heuristics**. If the user commissioned an audit, record the signal and continue with its requested scope; do not declare the token unsafe or cancel the task solely from heuristics.
 
-### Hard Kills (Skip Immediately)
+### Priority signals (do not automatically cancel an authorized review)
 - **Contract not verified** on Etherscan/Solscan → Cannot audit source = cannot trust
 - **Deployer wallet** has history of rug pulls (check Etherscan deployer page)
 - **Token age < 1 hour** AND no known team → Too early, wait for more data
@@ -22,7 +27,7 @@ Check these BEFORE reading a single line of code. If any are true, skip the audi
 - **Transfer hook present** (Token-2022) with mutable hook program → Honeypot vector
 - **Permanent delegate** extension (Token-2022) → Can steal all holder tokens
 
-### Soft Kills (Proceed with Extreme Caution)
+### Additional caution signals (scope and risk dependent)
 - Top holder > 20% of supply (excluding DEX pools)
 - LP not burned or locked in verified contract
 - Contract is upgradeable / proxy with retained admin

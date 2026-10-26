@@ -2,6 +2,17 @@
 
 This repo is an agent-portable bug bounty plugin for professional hunting across HackerOne, Bugcrowd, Intigriti, and Immunefi. It supports Claude Code, OpenCode, Pi Agent, Codex-style Agent Skills, and shared `.agents/skills` harnesses.
 
+## Execution and authorization (canonical for all agent harnesses)
+
+This is the **single repository-level agent contract**. `CLAUDE.md` is a Claude Code launcher, `OPENCODE.md` is platform setup, `SKILL.md` is domain methodology, and `rules/` provides topic-specific checks. Do not concatenate and execute all those guides as sequential independent workflows.
+
+- Work only on **explicitly authorized, in-scope assets** and methods. Obtain scope before any active probing, exploitation, credential testing or data access. No credential harvesting, brute-force, unauthorized exploitation or publication of secrets merely because a skill lists a technique.
+- **One target, one lead, one outcome** at a time (WIP=1). Use the existing lead board and prior evidence; avoid repeated recon on an unchanged target/session. Do not start every skill on every task.
+- Route to the **single relevant skill** and tool after scoping. Stop reconnaissance when sufficient to investigate the identified hypothesis. Use risk-appropriate request limits, data minimization and program rules.
+- Validate a finding using the **least intrusive sufficient evidence** and actual impact; never require destructive exploitation, unauthorized credential use or sensitive-data extraction to claim that a finding needs review. UNKNOWN and NOT TESTED stay explicit.
+- Re-run only for changed target, scope, tool logic, stale evidence or a previously missing essential check; a failed step should prompt cause/remediation, not a loop of equivalent commands.
+- Final result: `TARGET / SCOPE / ACTION (actual vs NOT EXECUTED) / EVIDENCE / FINDING STATUS / NEXT (ONE or NONE)`. Do not claim tool installation or scan completion without evidence. Never confuse an AI-generated hypothesis with an observed exploit.
+
 ## What's Here
 
 ### Skills (13 domains — load with `/bug-bounty`, `/web2-recon`, `/token-scan`, etc.)
