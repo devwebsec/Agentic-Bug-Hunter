@@ -2,6 +2,11 @@
 name: security-arsenal
 description: Security payloads, bypass tables, wordlists, gf pattern names, always-rejected bug list, and conditionally-valid-with-chain table. Use when you need specific payloads for XSS/SSRF/SQLi/XXE/NoSQLi/command injection/SSTI/IDOR/path-traversal/HTTP smuggling/WebSocket/MFA bypass, bypass techniques, or to check if a finding is submittable. Also use when asked about what NOT to submit.
 ---
+## Scoped execution / no implicit side effects
+
+This is **reference material**, not an executor or mandatory test sequence. Payloads and sample credentials/hosts are examples, not permission to send traffic. Choose one minimally invasive authorized test if needed for the user's task. Sensitive-data extraction, cloud metadata access, credential capture, live DoS/brute force, or bypass of unapproved systems must not be executed merely to 'prove impact'. Repository [AGENTS.md](../../AGENTS.md) governs authority, WIP=1, trusted evidence, required human approval and terminal outcomes. Loading this file alone does not authorize running tools. Return to the requested result after one relevant step; do not recursively invoke master workflows.
+
+
 
 # SECURITY ARSENAL
 
