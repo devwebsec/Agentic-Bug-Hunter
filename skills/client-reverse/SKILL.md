@@ -2,6 +2,11 @@
 name: client-reverse
 description: 'Client-side request-signing and anti-bot token reversal for bug bounty — when a request carries a sign/sig/hmac/token/nonce/timestamp/X-Sensor header that Burp Repeater cannot replay, recover the signer just enough to reproduce the request outside the client. Packet-first staging (capture real request → prove replay works → only reverse if replay fails) across the locate→recover→runtime→validation→replay spine. Covers tracing backward from the signature field (writer→builder→entry→source), isolating user-mutable sign inputs (timestamp/nonce/deviceId/body) vs constants (secret key), hooking fetch/XHR in DevTools, JS deobfuscation basics (webpack/wasm/JSVMP), and the bounty payoff: reach the protected API to then hunt IDOR/auth/business-logic. Use when Burp/mitmproxy replay of a signed or anti-bot-gated request fails and you suspect a client-computed field is blocking you.'
 ---
+## Scoped execution / no implicit side effects
+
+Only inspect apps/accounts and requests explicitly authorized for testing. Treat replay and token generation examples as lab/reference; no third-party anti-bot evasion or automated mutation of real customer operations without specific permission. Reuse captured authorized requests where still valid and stop at the minimal evidence required. Repository [AGENTS.md](../../AGENTS.md) governs authority, WIP=1, trusted evidence, required human approval and terminal outcomes. Loading this file alone does not authorize running tools. Return to the requested result after one relevant step; do not recursively invoke master workflows.
+
+
 
 # CLIENT-SIDE REQUEST-SIGNING / ANTI-BOT TOKEN REVERSAL
 
