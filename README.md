@@ -1,4 +1,6 @@
 <p align="center">
+
+> **devwebsec portfolio boundary (2026-11-14):** this repository contains an upstream-style independent bug-bounty toolkit (the documentation credits AwareXone). A tested API/data/evidence integration into DESIGN-BY-SECURITY, Wazuh production, Fleet or either local Copilot is **NOT VERIFIED**. This notice does not change upstream authorship, ownership, license or test claims. [Cross-repo boundary](docs/SECURITYWORKSPACE-PORTFOLIO-BOUNDARY-20261114.md).
   <img src="assets/banner.png" alt="Agentic Bug Hunter - by AwareXone - AI-powered bug bounty reconnaissance and vulnerability discovery" width="100%"/>
 </p>
 
