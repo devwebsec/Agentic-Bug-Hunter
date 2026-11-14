@@ -624,3 +624,9 @@ Thanks to everyone who has contributed to BugHunter. Click any avatar to open th
     <a href="https://github.com/Awarexone">GitHub</a>
   </sub>
 </p>
+
+---
+
+## devwebsec portfolio boundary (2026-11-14)
+
+**Repository context only:** this README retains the upstream AwareXone authorship, branding and installation documentation. The linked [SecurityWorkspace dependency note](docs/SECURITYWORKSPACE-PORTFOLIO-BOUNDARY-20261114.md) does **not** assert that this independent toolkit is connected to Wazuh production, Fleet, a local Copilot, the design authority, or any verified deployment. Actual runtime/evidence integration requires a separately reviewed contract and scoped authorization. `INTEGRATION=NOT_VERIFIED`.
